@@ -10,11 +10,27 @@ import UIKit
 class ViewController: UIViewController {
 
     var tablewView = UITableView()
+//MARK: - для аппенда в аррей:
+
+    var addString: [String] = []
+    let tempTimeString: String = "s"
+    let tempTitleString: String = "s"
+    let tempNoteString: String = "a"
+    let tempLocationString: String = "s"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemGray5
+        addStringtoString()
         setupTableView()
+    }
+    
+    private func addStringtoString(){
+        if tempTimeString.isEmpty {print("TimeString empty")} else {addString.append(tempTimeString)}
+        if tempTitleString.isEmpty {print("TitleString is empty")} else {addString.append(tempTitleString)}
+        if tempNoteString.isEmpty {print("NoteString is empty")} else {addString.append(tempNoteString)}
+        if tempLocationString.isEmpty {print("LocationString is empty")} else {addString.append(tempLocationString)}
+        modelS.append(addString)
     }
 }
 
@@ -41,16 +57,16 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource{
     
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        5
+        modelS.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        3
+        modelS[section].count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = "111"
+        cell.textLabel?.text = modelS[indexPath.section][indexPath.row]
         return cell
     }
     
